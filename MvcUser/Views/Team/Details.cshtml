@@ -1,0 +1,44 @@
+﻿@model Entities.ViewModels.TeamViewModels.TeamPageViewModel
+
+@{
+    ViewData["Title"] = "О группе";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<form asp-controller="Team" asp-action="Details">
+    <div class="text-lg-center">
+        @if(Model.Symbol != null)
+        {
+            <img style='width:160px;height:160px'src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Symbol))" />
+        }
+
+        <br/>
+        <b>Наименование: </b>@Model.TeamName<br/>
+        <b>Куратор: </b><a asp-controller="Account" asp-action="Profile" asp-route-id="@Model.LeaderId">@Model.LeaderName</a><br/>
+        @if (Model.Description != null)
+        {
+            <p>@Model.Description</p>
+        }
+        <b>Город: </b>@Model.City<br/>
+        <b>Дата основания: </b>@Model.Date<br/>
+        <b>Факультет: </b>@Model.Section<br/>
+        <b>Ссылка на группу ВКонтакте: </b><a href="@Model.Url">@Model.Url</a><br/>
+    </div>
+</form>
+
+<div class="text-lg-center">
+    <br />
+    @if(!User.IsInRole("leader"))
+     {
+        <form asp-controller="Team" asp-route-id = "@Model.TeamId" asp-action="Join">
+            <input type="submit" value="Присоединиться" />
+        </form>
+     }
+    <br />
+
+    <form asp-controller="Team" asp-action="GetUsersFromTeam" asp-route-id="@Model.TeamId">
+        <input type="submit" value="Просмотреть состав" />
+    </form>
+</div>

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Добавление должности";
+}
+
+<form asp-controller = "TeamManage" method="post" asp-action="AddRange">
+    <p>
+        <label for="range">Выберите должность: </label>
+        <select name="range">
+            <option value="Комиссар">Староста</option>
+            <option value="Боец">Рядовой</option>
+            <option value="Мастер">Профорг</option>
+        </select>
+    </p>
+
+    <p>
+        <input type ="submit" value="Сохранить" />
+    </p>
+</form>

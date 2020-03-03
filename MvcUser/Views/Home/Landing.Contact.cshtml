@@ -1,0 +1,62 @@
+﻿<section id="contact">
+    <div class="container-fluid">
+
+        <div class="section-header">
+            <h3>Контакты</h3>
+        </div>
+
+        <div class="row wow fadeInUp">
+
+            <div class="col-lg-6">
+                <div class="map mb-4 mb-lg-0">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6421.086741251805!2d40.085353102977145!3d47.41712131879839!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40e2494cf3ce3995%3A0x9bd7e7b7d1d69264!2z0K7QttC90L4t0KDQvtGB0YHQuNC50YHQutC40Lkg0LPQvtGB0YPQtNCw0YDRgdGC0LLQtdC90L3Ri9C5INC_0L7Qu9C40YLQtdGF0L3QuNGH0LXRgdC60LjQuSDRg9C90LjQstC10YDRgdC40YLQtdGCICjQndCf0JgpINC40LzQtdC90Lgg0Jwu0JguINCf0LvQsNGC0L7QstCw!5e0!3m2!1sru!2sua!4v1562102145849!5m2!1sru!2sua" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-4 info">
+                        <i class="ion-ios-location-outline"></i>
+                        <p>Ростовская обл., ул. Просвещения, 132, Новочеркасск, 346428</p>
+                    </div>
+                    <div class="col-md-4 info">
+                        <i class="ion-ios-email-outline"></i>
+                        <p>geogeometry@mail.ru</p>
+                    </div>
+                    <div class="col-md-4 info">
+                        <i class="ion-ios-telephone-outline"></i>
+                        <p></p>
+                    </div>
+                </div>
+
+                <div class="form">
+                    <div id="sendmessage">Сообщение отправлено. Спасибо!</div>
+                    <div id="errormessage"></div>
+                    <form action="" method="post" role="form" class="contactForm">
+                        <div class="form-row">
+                            <div class="form-group col-lg-6">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Имя" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
+                                <div class="validation"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Пожалуйста, напишите что-нибудь для нас" placeholder="Сообщение"></textarea>
+                            <div class="validation"></div>
+                        </div>
+                        <div class="text-center"><button type="submit" title="Send Message">Отправить</button></div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section><!-- #contact -->

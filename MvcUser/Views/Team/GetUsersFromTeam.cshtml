@@ -1,0 +1,39 @@
+﻿@using Entities.ViewModels
+@model IEnumerable<UserFromTeamResponse>
+@{
+    ViewData["Title"] = "Состав группы";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Эл.почта</th>
+            <th>Должность</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Account" asp-action="Profile" asp-route-id="@user.UserId">@user.FIO</a>
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.Rang
+                </td>
+                @*<td>
+                    @if (user.FileContent != null)
+                    {
+                        <img style='width:120px;height:35px'src="data:image/jpeg;base64,@(Convert.ToBase64String(user.FileContent))" />
+                    }
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

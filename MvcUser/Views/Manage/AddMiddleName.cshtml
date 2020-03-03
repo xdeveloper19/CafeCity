@@ -1,0 +1,24 @@
+﻿@model Entities.ViewModels.ManageViewModels.AddMiddleNameViewModel
+
+@{
+    ViewData["Title"] = "Добавление отчества";
+}
+
+<h2>@ViewData["Title"].</h2>
+
+<form asp-controller="Manage" asp-action="AddMiddleName" method="post" class="form-horizontal">
+    <h4>Добавить отчество.</h4>
+    <hr />
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="MiddleName"></label><br />
+        <input asp-for="MiddleName" />
+        <span asp-validation-for="MiddleName"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type ="submit" class="btn btn-default">Добавить</button>
+        </div>
+    </div>
+</form>

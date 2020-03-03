@@ -1,0 +1,44 @@
+﻿@model  Entities.ViewModels.LoginViewModel
+
+@{ 
+    ViewData["Title"] = "Авторизация";
+}
+
+<div class="auth-container">
+    <div class="container auth-box">
+        <div class="row justify-content-center">
+            <header class="section-header">
+                <h3>Авторизация</h3>
+            </header>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 form">
+                <form method="post" asp-controller="Account" asp-action="Login"
+                        asp-route-returnUrl="@Model.ReturnUrl">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div>
+                        <label asp-for="Email"></label><br />
+                        <input class="form-control" asp-for="Email" />
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Password"></label><br />
+                        <input class="form-control" asp-for="Password" />
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div>
+                        <label asp-for="RememberMe"></label>
+                        <input asp-for="RememberMe" />
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-info auth-box-btn" value="Войти" />
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-lg-6 offset-lg-1 background order-lg-2 order-1 wow fadeInUp">
+                <img src="~/img/about-img.svg" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</div>

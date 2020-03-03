@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Настройки группы";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (ViewData["StatusMessage"].ToString() == "Ошибка.")
+{
+    <p class="text-danger">@ViewData["StatusMessage"]</p>
+}
+else
+{
+    <p class="text-success">@ViewData["StatusMessage"]</p>
+}
+
+
+<div>
+    <h4>Измените настройки Вашей группы</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Основная информация:</dt>
+        <dd>
+            <a asp-controller="TeamManage" asp-action="Edit" class="btn-bracketed">Изменить</a>
+        </dd>
+
+        <dt>Состав: </dt>
+        <dd>
+            <a asp-controller="TeamManage" asp-action="GetUsersFromTeam" class="btn-bracketed">Изменить</a>
+        </dd>
+    </dl>
+</div>

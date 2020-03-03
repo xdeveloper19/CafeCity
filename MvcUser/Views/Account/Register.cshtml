@@ -1,0 +1,59 @@
+﻿@model Entities.ViewModels.RegisterViewModel
+
+@{ 
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="auth-container">
+    <div class="container auth-box">
+        <div class="row justify-content-center">
+            <header class="section-header">
+                <h3>Регистрация</h3>
+            </header>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 form">
+                <form method="post" asp-controller="Account" asp-action="Register">
+                    <div asp-validation-summary="ModelOnly">
+                    </div>
+                    <div>
+                        <label asp-for="Email"></label><br />
+                        <input class="form-control" asp-for="Email" />
+                        <span asp-validation-for="Email"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="FirstName"></label><br />
+                        <input class="form-control" asp-for="FirstName" />
+                        <span asp-validation-for="FirstName"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="LastName"></label><br />
+                        <input class="form-control" asp-for="LastName" />
+                        <span asp-validation-for="LastName"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Password"></label><br />
+                        <input class="form-control" asp-for="Password" />
+                        <span asp-validation-for="Password"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="PasswordConfirm"></label>
+                        <input class="form-control" asp-for="PasswordConfirm" />
+                        <span asp-validation-for="PasswordConfirm"></span>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn auth-box-btn btn-info" value="Регистрация" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 wow fadeInUp order-1 offset-lg-1 order-lg-2">
+                <img src="~/img/about-img.svg" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</div>

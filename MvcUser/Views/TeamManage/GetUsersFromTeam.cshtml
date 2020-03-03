@@ -1,0 +1,41 @@
+﻿@using Entities.ViewModels
+@model IEnumerable<UserFromTeamResponse>
+@{
+    ViewData["Title"] = "Управление группой";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Эл.почта</th>
+            <th>Должность</th>
+            <th>Действия</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Account" asp-action="Profile" asp-route-id="@user.UserId">@user.FIO</a>
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    @user.Rang
+                </td>
+                <td>
+                    <a asp-controller="TeamManage" asp-action="AddRange" asp-route-id="@user.UserId">Изменить должность</a>
+                </td>
+                <td>
+                    <a asp-controller="TeamManage" asp-action="LogOutTeam" asp-route-id="@user.UserId">Удалить из группы</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

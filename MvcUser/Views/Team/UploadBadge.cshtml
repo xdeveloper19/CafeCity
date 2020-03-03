@@ -1,0 +1,53 @@
+﻿@model Entities.ViewModels.BadgeViewModels.CreateBadgeViewModel
+
+
+@{
+    ViewData["Title"] = "Добавление значка";
+}
+
+<h2>Загрузка значка группы</h2>
+
+<form asp-action="UploadBadge" asp-controller="Team" method="post" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="uploader">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <p>
+        <label asp-for="Imagine"></label>
+        <input name="Imagine" type="file" class="form-control" />
+    </p>
+
+    @*<div class="row">
+        <div class="col-md-9">
+            <div id="dropzone">
+                <form action="/Team/UploadImagine" class="dropzone needsclick dz-clickable" id="uploader">
+                    <div class="dz-message needsclick">
+                        Загрузить значок
+                    </div>
+                </form>
+                <label asp-for="Imagine"></label>
+                <input name="Значок" type="file" class="form-control" />
+            </div>
+        </div>
+    </div>*@
+
+    
+    <p>
+        <input type ="submit" value="Стать руководителем" />
+    </p>
+</form>
+
+
+
+
+

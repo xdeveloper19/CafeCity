@@ -1,0 +1,62 @@
+﻿@model Entities.ViewModels.AccountViewModels.UserProfileViewModel
+
+@{
+    ViewData["Title"] = "Профиль пользователя";
+}
+
+<h1>Добро пожаловать!</h1>
+<br>
+<h2>Ваш профиль</h2>
+
+
+<form asp-controller="Home" asp-action="LoggedIn">
+    <div>
+        <label asp-for="FirstName"></label><br />
+        <p>@Model.FirstName</p>
+        <span asp-validation-for="FirstName"></span>
+    </div>
+
+    <div>
+        <label asp-for="LastName"></label><br />
+        <p>@Model.LastName</p>
+        <span asp-validation-for="LastName"></span>
+    </div>
+
+    <div>
+        <label asp-for="MiddleName"></label><br />
+        <p>@Model.MiddleName</p>
+        <span asp-validation-for="MiddleName"></span>
+    </div>
+
+    <div>
+        <label asp-for="Team"></label><br />
+        <p>@Model.Team</p>
+        <span asp-validation-for="Team"></span>
+    </div>
+
+    <div>
+        <label asp-for="Section"></label><br />
+        <p>@Model.Section</p>
+        <span asp-validation-for="Section"></span>
+    </div>
+</form>
+
+@if (User.IsInRole("admin"))
+{
+    <form asp-controller="Manage" asp-action="Mailing" method="get">
+        <input type="submit" value="Отправить уведомления" />
+    </form>
+}
+
+<form method="get" asp-controller="Team" asp-action="Index">
+    <input type="submit" value="Список групп" />
+</form>
+
+<form method="get" asp-controller="Manage" asp-action="Index">
+    <input type="submit" value="Настройки аккаунта" />
+</form>
+
+<form method="post" asp-controller="Account" asp-action="LogOff">
+    <input type="submit" value="Выход" />
+</form>
+

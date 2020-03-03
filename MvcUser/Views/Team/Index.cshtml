@@ -1,0 +1,32 @@
+﻿@using Entities.ViewModels
+@model  IEnumerable<TeamResponse>
+@{
+    ViewData["Title"] = "Группы";
+}
+
+<h2>Группы</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Группы</th>
+            <th>Куратор</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var team in Model)
+        {
+            <tr>
+                <td>
+                    @team.Name
+                </td>
+                <td>
+                    @team.Leader
+                </td>
+                <td>
+                    <a asp-controller="Team" asp-action="Details" asp-route-id="@team.TeamId">Детали</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
