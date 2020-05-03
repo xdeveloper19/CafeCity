@@ -35,6 +35,9 @@ namespace MvcUser
             services.AddDbContext<TeamContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DEBContext"), x => x.MigrationsAssembly("Entities")));
 
+            services.AddDbContext<CafeContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DEBContext"), x => x.MigrationsAssembly("Entities")));
+
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationUserContext>()
                 .AddDefaultTokenProviders();
@@ -43,12 +46,20 @@ namespace MvcUser
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.Configure<SMSoptions>(Configuration);
             //services.Configure<Emailoptions>(Configuration);
-
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 1;
             }
-            );
+           );
+           
 
             /*var optionsBuilder = new DbContextOptionsBuilder<ApplicationUserContext>();
             optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DEBContext"));

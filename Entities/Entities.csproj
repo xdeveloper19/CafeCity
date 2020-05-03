@@ -338,6 +338,15 @@
       <DependentUpon>20190727125045_TeamId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationUserContextModelSnapshot.cs" />
+    <Compile Include="Migrations\Cafe\20200417115621_CafeInitial.cs" />
+    <Compile Include="Migrations\Cafe\20200417115621_CafeInitial.designer.cs">
+      <DependentUpon>20200417115621_CafeInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Cafe\20200417120601_ForeignKeyForUser.cs" />
+    <Compile Include="Migrations\Cafe\20200417120601_ForeignKeyForUser.designer.cs">
+      <DependentUpon>20200417120601_ForeignKeyForUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Cafe\CafeContextModelSnapshot.cs" />
     <Compile Include="Migrations\Team\20190621151709_InitialTeam.cs" />
     <Compile Include="Migrations\Team\20190621151709_InitialTeam.designer.cs">
       <DependentUpon>20190621151709_InitialTeam.cs</DependentUpon>
@@ -366,10 +375,13 @@
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\Facility.cs" />
+    <Compile Include="Models\GeoData.cs" />
+    <Compile Include="Models\MediaData.cs" />
     <Compile Include="Models\Sliver.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserBadge.cs" />
+    <Compile Include="Models\UserFacility.cs" />
     <Compile Include="Models\UserSliver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorii\AuthMethods.cs" />

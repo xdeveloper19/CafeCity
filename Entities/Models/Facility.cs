@@ -9,9 +9,13 @@ namespace Entities.Models
     public class Facility
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid AdminId { get; set; }
         public string Name { get; set; }
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
+        public string WorkSchedule { get; set; }
+        public string Rate { get; set; }
+        public string Phone { get; set; }
+        public string Description { get; set; }
+        public List<UserFacility> UserFacilities { get; set; }
+        public List<MediaData> Media { get; set; }
+        public List<GeoData> Geo { get; set; }
     }
 }

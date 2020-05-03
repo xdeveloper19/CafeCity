@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,34 @@ namespace Entities.Context
 {
     public class CafeContext: DbContext
     {
-        public CafeContext(DbContextOptions<TeamContext> options) : base(options)
+        public CafeContext(DbContextOptions<CafeContext> options) : base(options)
         {
             Database.Migrate();
         }
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<Badge> Badges { get; set; }
-        public DbSet<UserBadge> UserBadges { get; set; }
-        public DbSet<Sliver> Slivers { get; set; }
-        public DbSet<UserSliver> UserSlivers { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
+        public DbSet<GeoData> GeoData { get; set; }
+        public DbSet<MediaData> Media { get; set; }
+        public DbSet<UserFacility> UserHasFacility { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<UserBadge>().HasKey(p => new { p.UserId });
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Facility>()
+                 .HasMany(c => c.UserFacilities)
+                 .WithOne().HasForeignKey(p => p.FacilityId)
+                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<UserSliver>().HasKey(p => new { p.UserId });
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Facility>()
+                .HasMany(c => c.Geo)
+                .WithOne().HasForeignKey(p => p.FacilityId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Facility>()
+                .HasMany(c => c.Media)
+                .WithOne().HasForeignKey(p => p.FacilityId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<UserFacility>().HasKey(p => new { p.FacilityId, p.UserId });
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Entities.Context
     {
         public TeamContext(DbContextOptions<TeamContext> options) : base(options)
         {
-            Database.Migrate();
+           // Database.Migrate();
         }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Badge> Badges { get; set; }

@@ -269,7 +269,7 @@ C:\Users\User\source\repos\CafeCity\Entities\bin\Debug\System.Reflection.Metadat
 C:\Users\User\source\repos\CafeCity\Entities\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\User\source\repos\CafeCity\Entities\bin\Debug\System.Text.Encodings.Web.xml
 C:\Users\User\source\repos\CafeCity\Entities\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\User\source\repos\CafeCity\Entities\obj\Debug\Entities.csprojAssemblyReference.cache
 C:\Users\User\source\repos\CafeCity\Entities\obj\Debug\Entities.csproj.CopyComplete
 C:\Users\User\source\repos\CafeCity\Entities\obj\Debug\Entities.dll
 C:\Users\User\source\repos\CafeCity\Entities\obj\Debug\Entities.pdb
+C:\Users\User\source\repos\CafeCity\Entities\obj\Debug\Entities.csprojAssemblyReference.cache
