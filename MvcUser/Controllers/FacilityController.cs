@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Entities.Context;
+using Entities.Repositorii;
+using Entities.ViewModels.AccountViewModels;
+using Entities.ViewModels.FacilityViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,10 +12,37 @@ namespace MvcUser.Controllers
     [ApiController]
     public class FacilityController : ControllerBase
     {
-        private readonly CafeContext _applicationContext;
-        public FacilityController(CafeContext applicationContext)
+        private readonly CafeContext _cafeContext;
+        private readonly ApplicationUserContext _userContext;
+
+        public FacilityController(CafeContext cafeContext, ApplicationUserContext userContext)
         {
-            _applicationContext = applicationContext;
+            _cafeContext = cafeContext;
+            _userContext = userContext;
+        }
+
+        [HttpPost]
+        [Route("CreatePlace")]
+        public async Task<IActionResult> CreatePlace(AddPlaceViewModel model)
+        {
+            FacilityMethods AuthData = new FacilityMethods(_userContext, _cafeContext);
+            var Result = await AuthData.AddFavoriteFacility(model);
+            if (Result.Status == Entities.ViewModels.ResponseResult.OK)
+                return Ok(Result);
+            else
+                return BadRequest(Result);
+        }
+
+        [HttpGet]
+        [Route("FavoritePlaces")]
+        public async Task<IActionResult> FavoritePlaces(string user_id)
+        {
+            FacilityMethods AuthData = new FacilityMethods(_userContext, _cafeContext);
+            var Result = await AuthData.GetUserFacilities(user_id);
+            if (Result.Status == Entities.ViewModels.ResponseResult.OK)
+                return Ok(Result);
+            else
+                return BadRequest(Result);
         }
 
         //[HttpPost]

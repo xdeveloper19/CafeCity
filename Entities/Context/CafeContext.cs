@@ -28,9 +28,10 @@ namespace Entities.Context
                  .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Facility>()
-                .HasMany(c => c.Geo)
-                .WithOne().HasForeignKey(p => p.FacilityId)
-                .OnDelete(DeleteBehavior.Cascade);
+            .HasOne<GeoData>(s => s.Geo)
+            .WithOne(ad => ad.Place)
+            .HasForeignKey<GeoData>(ad => ad.FacilityId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Facility>()
                 .HasMany(c => c.Media)

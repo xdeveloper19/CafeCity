@@ -1,6 +1,8 @@
 ﻿using Entities.Context;
 using Entities.Models;
 using Entities.ViewModels;
+using Entities.ViewModels.AccountViewModels;
+using Entities.ViewModels.FacilityViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,12 @@ namespace Entities.Repositorii
 {
     public class FacilityMethods
     {
+        private readonly ApplicationUserContext _userContext;
         private readonly CafeContext _applicationContext;
-        public FacilityMethods(CafeContext applicationContext)
+        public FacilityMethods(ApplicationUserContext userContext, CafeContext applicationContext)
         {
             _applicationContext = applicationContext;
+            _userContext = userContext;
         }
 
         //public async Task<ServiceResponseObject<FacilityResponse>> Create(Guid userId, CreateFacilityViewModel model)
@@ -52,31 +56,89 @@ namespace Entities.Repositorii
         //    return DataContent;
         //}
 
-        //public async Task<ServiceResponseObject<BaseResponseObject>> AddFavoriteFacility(Guid userId, Guid id)
-        //{
-        //    var currentUser = await _applicationContext.Users.FindAsync(userId);
-        //    var facility = await _applicationContext.Facilities.FindAsync(id);
+        public async Task<ServiceResponseObject<BaseResponseObject>> AddFavoriteFacility(AddPlaceViewModel model)
+        {
+            var currentUser = await _userContext.Users.FindAsync(model.UserId);
+            var facility = _applicationContext.Facilities.Where(s => s.PlaceId == model.Id).FirstOrDefault();
 
-        //    ServiceResponseObject<BaseResponseObject> DataContent = new ServiceResponseObject<BaseResponseObject>();
-        //    if (currentUser == null)
-        //    {
-        //        DataContent.Message = "Пользователь не найден!";
-        //        DataContent.Status = ResponseResult.Error;
-        //        return DataContent;
-        //    }
+            ServiceResponseObject<BaseResponseObject> DataContent = new ServiceResponseObject<BaseResponseObject>();
+            if (currentUser == null)
+            {
+                DataContent.Message = "Пользователь не найден!";
+                DataContent.Status = ResponseResult.Error;
+                return DataContent;
+            }
 
-        //    if (facility != null)
-        //    {
-        //        currentUser.Facilities.Add(facility);
-        //        await _applicationContext.SaveChangesAsync();
-        //        DataContent.Message = "Заведение успешно добавлено в список избранных!";
-        //        DataContent.Status = ResponseResult.OK;
-        //        return DataContent;
-        //    }
-        //    DataContent.Message = "Этого заведения не существует в данном контексте.";
-        //    DataContent.Status = ResponseResult.Error;
-        //    return DataContent;
-        //}
+            if (facility == null)
+            {
+                facility = new Facility
+                {
+                    Name = model.Name,
+                    PlaceId = model.Id,
+                    Address = model.Address,
+                    Description = model.Description,
+                    Rate = model.Rating,
+                    Phone = model.PhoneNumber
+                };
+
+                GeoData geo = new GeoData
+                {
+                    FacilityId = facility.Id,
+                    Address = facility.Address,
+                    Latitude = model.Latitude,
+                    Longitude = model.Longitude
+                };
+
+               // byte[] image = Convert.FromBase64String(model.PhotoData);
+                MediaData media = new MediaData
+                {
+                    FacilityId = facility.Id,
+                    //Content = image,
+                    Path = model.PhotoId
+                };
+                var userFac = new UserFacility
+                {
+                    FacilityId = facility.Id,
+                    UserId = currentUser.Id
+                };
+
+                _applicationContext.Media.Add(media);
+                _applicationContext.Facilities.Add(facility);
+                _applicationContext.UserHasFacility.Add(userFac);
+                _applicationContext.GeoData.Add(geo);
+                await _applicationContext.SaveChangesAsync();
+
+                DataContent.Message = "Заведение успешно добавлено в список избранных!";
+                DataContent.Status = ResponseResult.OK;
+                return DataContent;
+            }
+
+            var user_place = _applicationContext.UserHasFacility.Where(p => p.FacilityId == facility.Id && p.UserId == model.UserId).FirstOrDefault();
+            if (user_place == null)
+            {
+                user_place = new UserFacility()
+                {
+                    FacilityId = facility.Id,
+                    UserId = model.UserId
+                };
+
+                _applicationContext.UserHasFacility.Add(user_place);
+               
+                _applicationContext.Update(facility);
+                await _applicationContext.SaveChangesAsync();
+                DataContent.Message = "Заведение успешно добавлено в список избранных!";
+                DataContent.Status = ResponseResult.OK;
+                return DataContent;
+            }
+            else
+            {
+                DataContent.Message = "Заведение уже добавлено в список избранных!";
+                DataContent.Status = ResponseResult.Error;
+                return DataContent;
+            }
+      
+            
+        }
 
         //public async Task<ServiceResponseObject<ListResponseObject<Facility>>> GetFacilitiesByCategory(Category category)
         //{
@@ -173,37 +235,44 @@ namespace Entities.Repositorii
         //    return TeamData;
         //}
 
-        //public async Task<ServiceResponseObject<ListResponseObject<Facility>>> GetUserFacilities(Guid id)
-        //{
-        //    var currentUser = await _applicationContext.Users.FindAsync(id);
-        //    ServiceResponseObject<ListResponseObject<Facility>> TeamData = new ServiceResponseObject<ListResponseObject<Facility>>();
-        //    if (currentUser != null)
-        //    {
-        //        var userFacilities = _applicationContext.Users.Where(f => f.Id == id)
-        //            .Select(s => new ListResponseObject<Facility>
-        //            {
-        //                Objects = s.Facilities
-        //            }).FirstOrDefault();
+        public async Task<ServiceResponseObject<ListResponse<PlaceModel>>> GetUserFacilities(string id)
+        {
+            var currentUser = await _userContext.Users.FindAsync(id);
+            ServiceResponseObject<ListResponse<PlaceModel>> TeamData = new ServiceResponseObject<ListResponse<PlaceModel>>();
+            TeamData.ResponseData = new ListResponse<PlaceModel>();
 
-        //        if (userFacilities != null)
-        //        {
-        //            /*TeamData.ResponseData = new ListResponseObject<Facility>
-        //            {
-        //                Objects = userFacilities
-        //            };*/
-        //            TeamData.ResponseData = userFacilities;
-        //            TeamData.Message = "Успешно!";
-        //            TeamData.Status = ResponseResult.OK;
-        //            return TeamData;
-        //        }
-        //        TeamData.Message = "У пользователя нет избранных заведений.";
-        //        TeamData.Status = ResponseResult.Error;
-        //        return TeamData;
-        //    }
-        //    TeamData.Message = "Пользователь не найден.";
-        //    TeamData.Status = ResponseResult.OK;
-        //    return TeamData;
-        //}
+            if (currentUser != null)
+            {
+                var userFacilities = _applicationContext.UserHasFacility.Where(f => f.UserId == id).ToList();
+                if (userFacilities != null && userFacilities.Count != 0)
+                {
+                    foreach (var u_place in userFacilities)
+                    {
+                        var place = await _applicationContext.Facilities.FindAsync(u_place.FacilityId);
+                        var media = _applicationContext.Media.Where(s => s.FacilityId == u_place.FacilityId).ToList();
+
+                        TeamData.ResponseData.Objects.Add(new PlaceModel
+                        { 
+                            Address = place.Address,
+                            Rating = place.Rate,
+                            Path = media[0].Path,
+                            Id = place.PlaceId,
+                            Name = place.Name,
+                            Descriptoin = place.Description
+                        });
+                    }
+                    TeamData.Message = "Успешно!";
+                    TeamData.Status = ResponseResult.OK;
+                    return TeamData;
+                }
+                TeamData.Message = "У пользователя нет избранных заведений.";
+                TeamData.Status = ResponseResult.Error;
+                return TeamData;
+            }
+            TeamData.Message = "Пользователь не найден.";
+            TeamData.Status = ResponseResult.Error;
+            return TeamData;
+        }
 
         //public async Task<ServiceResponseObject<BaseResponseObject>> Edit(Guid id, EditFacilityViewModel model)
         //{

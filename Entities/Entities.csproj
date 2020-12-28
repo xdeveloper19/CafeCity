@@ -346,6 +346,10 @@
     <Compile Include="Migrations\Cafe\20200417120601_ForeignKeyForUser.designer.cs">
       <DependentUpon>20200417120601_ForeignKeyForUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Cafe\20200605221522_NewMigration.cs" />
+    <Compile Include="Migrations\Cafe\20200605221522_NewMigration.designer.cs">
+      <DependentUpon>20200605221522_NewMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Cafe\CafeContextModelSnapshot.cs" />
     <Compile Include="Migrations\Team\20190621151709_InitialTeam.cs" />
     <Compile Include="Migrations\Team\20190621151709_InitialTeam.designer.cs">
@@ -390,11 +394,15 @@
     <Compile Include="Repositorii\ManageMethods.cs" />
     <Compile Include="Repositorii\SeedSlivers.cs" />
     <Compile Include="Repositorii\TeamMethods.cs" />
+    <Compile Include="ViewModels\AccountViewModels\UserData.cs" />
     <Compile Include="ViewModels\AccountViewModels\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\BadgeViewModels\CreateBadgeViewModel.cs" />
     <Compile Include="ViewModels\BaseResponseObject.cs" />
+    <Compile Include="ViewModels\FacilityViewModels\AddPlaceViewModel.cs" />
     <Compile Include="ViewModels\FacilityViewModels\CreateFacilityViewModel.cs" />
     <Compile Include="ViewModels\FacilityViewModels\FacilityResponse.cs" />
+    <Compile Include="ViewModels\FacilityViewModels\PlaceData.cs" />
+    <Compile Include="ViewModels\FacilityViewModels\PlaceModel.cs" />
     <Compile Include="ViewModels\ListResponse.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\AuthResponse.cs" />

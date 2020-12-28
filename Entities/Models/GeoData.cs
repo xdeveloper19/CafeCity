@@ -10,6 +10,7 @@ namespace Entities.Models
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public Guid FacilityId { get; set; }
+        public Facility Place { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
         public string Address { get; set; }
